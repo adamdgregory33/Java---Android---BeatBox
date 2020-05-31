@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="controlsModel"
+            type="com.android.adam.beatbox.ControlsViewModel"
+            ></variable>
+
+    </data>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Speed:"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <SeekBar
+            android:max = "@{controlsModel.getMaxSeekBar}"
+            android:min = "@{controlsModel.getMinSeekBar}"
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id = "@+id/seekbar"
+            android:progress="@{controlsModel.getSeekBarValue()}"
+            android:onProgressChanged = "@{controlsModel::changeSpeed}"
+
+            />
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="@string/playback_speed"
+            android:text="@{String.format(@string/playback_speed, controlsModel.getSpeed())}"
+
+            />
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id = "@+id/recycler_view"
+        />
+</LinearLayout>
+
+</layout>
